@@ -232,7 +232,10 @@ ragRouter.post("/query", async (c) => {
 
       await stream.writeSSE({
         event: "end",
-        data: "[DONE]",
+        data: JSON.stringify({
+          done: true,
+          fullAnswer: result._fullStreamedAnswer || "",
+        }),
       });
     });
   }
